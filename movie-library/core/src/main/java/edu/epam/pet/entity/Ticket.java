@@ -7,32 +7,25 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @javax.persistence.Entity
-public class Cinema{
+public class Ticket{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cinema_id")
+    @Column(name = "ticket_id")
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "cinema_movie",
-            joinColumns = {@JoinColumn(name = "cinema_id")},
-            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
-    )
-    @ToString.Exclude
-    private Set<Movie> movies;
+    private BigDecimal cost;
 
-    @OneToMany(mappedBy = "cinema")
-    @ToString.Exclude
-    private Set<CinemaHall> halls;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "place_id")
+    private Place place;
 
     @Override
     public boolean equals(Object o) {
@@ -42,8 +35,8 @@ public class Cinema{
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
             return false;
         }
-        Cinema cinema = (Cinema) o;
-        return getId() != null && Objects.equals(getId(), cinema.getId());
+        Ticket ticket = (Ticket) o;
+        return getId() != null && Objects.equals(getId(), ticket.getId());
     }
 
     @Override

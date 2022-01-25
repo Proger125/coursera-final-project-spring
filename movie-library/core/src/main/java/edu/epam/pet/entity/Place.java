@@ -8,31 +8,27 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @javax.persistence.Entity
-public class Cinema{
+public class Place{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cinema_id")
+    @Column(name = "place_id")
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "cinema_movie",
-            joinColumns = {@JoinColumn(name = "cinema_id")},
-            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
-    )
-    @ToString.Exclude
-    private Set<Movie> movies;
+    private int seatRow;
 
-    @OneToMany(mappedBy = "cinema")
-    @ToString.Exclude
-    private Set<CinemaHall> halls;
+    private int seatPlace;
+
+    private boolean isTaken;
+
+    @ManyToOne
+    @JoinColumn(name = "cinema_session_id", nullable = false)
+    private CinemaSession cinemaSession;
 
     @Override
     public boolean equals(Object o) {
@@ -42,8 +38,8 @@ public class Cinema{
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
             return false;
         }
-        Cinema cinema = (Cinema) o;
-        return getId() != null && Objects.equals(getId(), cinema.getId());
+        Place place = (Place) o;
+        return getId() != null && Objects.equals(getId(), place.getId());
     }
 
     @Override
