@@ -4,50 +4,29 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@javax.persistence.Entity
-public class Cinema{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cinema_id")
-    private Long id;
+@Entity
+@Table(name = "cinemas")
+public class Cinema extends BaseEntity {
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "cinema_movie",
-            joinColumns = {@JoinColumn(name = "cinema_id")},
-            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
+            joinColumns = {@JoinColumn(name = "cinema_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")}
     )
     @ToString.Exclude
     private Set<Movie> movies;
 
-    @OneToMany(mappedBy = "cinema")
+    @OneToMany(mappedBy = "cinema", fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<CinemaHall> halls;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-            return false;
-        }
-        Cinema cinema = (Cinema) o;
-        return getId() != null && Objects.equals(getId(), cinema.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
 }
