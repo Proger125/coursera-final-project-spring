@@ -1,12 +1,9 @@
-plugins {
-    id 'java'
+ext {
+    hibernateValidatorVersion = '7.0.2.Final'
+    jacksonVersion = '2.13.1'
 }
-
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation project(':core')
+    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: hibernateValidatorVersion
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
 }
