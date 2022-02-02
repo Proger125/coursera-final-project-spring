@@ -1,0 +1,100 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="2.0.1" author="alex.dzyachenka">
+        <addColumn tableName="actors">
+            <column name="birth_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.2" author="alex.dzyachenka">
+        <dropColumn tableName="actors">
+            <column name="firstName"/>
+        </dropColumn>
+        <addColumn tableName="actors">
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.3" author="alex.dzyachenka">
+        <dropColumn tableName="actors">
+            <column name="lastName"/>
+        </dropColumn>
+        <addColumn tableName="actors">
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.4" author="alex.dzyachenka">
+        <dropColumn tableName="cinema_halls">
+            <column name="onePlaceCost"/>
+        </dropColumn>
+        <addColumn tableName="cinema_halls">
+            <column name="one_place_cost" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.5" author="alex.dzyachenka">
+        <dropColumn tableName="cinema_sessions">
+            <column name="sessionDate"/>
+        </dropColumn>
+        <addColumn tableName="cinema_sessions">
+            <column name="session_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.6" author="alex.dzyachenka">
+        <dropColumn tableName="movies">
+            <column name="creationYear"/>
+        </dropColumn>
+        <addColumn tableName="movies">
+            <column name="creation_year" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.7" author="alex.dzyachenka">
+        <dropColumn tableName="places">
+            <column name="isTaken"/>
+        </dropColumn>
+        <addColumn tableName="places">
+            <column name="is_taken" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.8" author="alex.dzyachenka">
+        <dropColumn tableName="places">
+            <column name="seatPlace"/>
+        </dropColumn>
+        <dropColumn tableName="places">
+            <column name="seatRow"/>
+        </dropColumn>
+        <addColumn tableName="places">
+            <column name="seat_place" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="places">
+            <column name="seat_row" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.9" author="alex.dzyachenka">
+        <dropColumn tableName="actors">
+            <column name="birth_date"/>
+        </dropColumn>
+        <addColumn tableName="actors">
+            <column name="birth_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

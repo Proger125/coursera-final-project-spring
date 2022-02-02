@@ -1,6 +1,5 @@
 package edu.epam.pet.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -21,7 +20,6 @@ public class ActorDto extends Dto {
     private String lastName;
 
     @NotNull
-    @JsonFormat(pattern = "yyyyMMddThhmmss")
     private LocalDateTime birthDate;
 
     @NotNull
