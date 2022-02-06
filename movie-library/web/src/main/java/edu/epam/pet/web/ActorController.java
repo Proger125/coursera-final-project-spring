@@ -35,7 +35,8 @@ public class ActorController implements CrudController<ActorDto>{
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<ActorDto> findAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
-                                  @RequestParam(name = "size", defaultValue = "5", required = false) int size) {
+                                  @RequestParam(name = "size", defaultValue = "5", required = false) int size
+    ) {
         return service.findAll(PageRequest.of(page, size));
     }
 

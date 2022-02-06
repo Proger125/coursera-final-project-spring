@@ -1,6 +1,5 @@
 package edu.epam.pet.service;
 
-import edu.epam.pet.dto.Dto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

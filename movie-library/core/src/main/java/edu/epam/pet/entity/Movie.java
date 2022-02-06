@@ -27,7 +27,7 @@ public class Movie extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "movie_actor",
             joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},
