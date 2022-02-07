@@ -4,8 +4,7 @@ import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 @Data
-public class Dto {
-
+public abstract class ResponseDto {
     @Min(value = 0)
     private Long id;
 }

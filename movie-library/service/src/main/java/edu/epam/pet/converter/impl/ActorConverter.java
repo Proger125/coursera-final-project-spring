@@ -1,18 +1,18 @@
 package edu.epam.pet.converter.impl;
 
 import edu.epam.pet.converter.Converter;
-import edu.epam.pet.dto.ActorDto;
+import edu.epam.pet.dto.actor.ActorRequestDto;
+import edu.epam.pet.dto.actor.ActorResponseDto;
 import edu.epam.pet.entity.Actor;
 import edu.epam.pet.entity.Gender;
 import edu.epam.pet.exception.converter.IllegalEnumArgumentException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActorConverter implements Converter<Actor, ActorDto> {
+public class ActorConverter implements Converter<Actor, ActorRequestDto, ActorResponseDto> {
     @Override
-    public Actor convertDtoToEntity(ActorDto actorDto) {
+    public Actor convertDtoToEntity(ActorRequestDto actorDto) {
         Actor actor = new Actor();
-        actor.setId(actorDto.getId());
         actor.setFirstName(actorDto.getFirstName());
         actor.setLastName(actorDto.getLastName());
         actor.setBirthDate(actorDto.getBirthDate());
@@ -26,8 +26,8 @@ public class ActorConverter implements Converter<Actor, ActorDto> {
     }
 
     @Override
-    public ActorDto convertEntityToDto(Actor actor) {
-        ActorDto actorDto = new ActorDto();
+    public ActorResponseDto convertEntityToDto(Actor actor) {
+        ActorResponseDto actorDto = new ActorResponseDto();
         actorDto.setId(actor.getId());
         actorDto.setFirstName(actor.getFirstName());
         actorDto.setLastName(actor.getLastName());

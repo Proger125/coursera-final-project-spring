@@ -24,6 +24,8 @@ public class CinemaHall extends BaseEntity {
     @ToString.Exclude
     private Cinema cinema;
 
-    @OneToMany(mappedBy = "cinemaHall", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cinemaHall", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Set<CinemaSession> cinemaSessions;
+
 }

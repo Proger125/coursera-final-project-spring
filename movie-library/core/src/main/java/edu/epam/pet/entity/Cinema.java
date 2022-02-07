@@ -16,6 +16,8 @@ import java.util.Set;
 @Table(name = "cinemas")
 public class Cinema extends BaseEntity {
 
+    private String name;
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "cinema_movie",

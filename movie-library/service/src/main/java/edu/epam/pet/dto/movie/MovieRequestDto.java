@@ -1,5 +1,7 @@
-package edu.epam.pet.dto;
+package edu.epam.pet.dto.movie;
 
+import edu.epam.pet.dto.RequestDto;
+import edu.epam.pet.dto.actor.ActorRequestDto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +14,7 @@ import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MovieDto extends Dto {
+public class MovieRequestDto extends RequestDto {
 
     @NotNull
     @Pattern(regexp = "^[A-Z0-9][a-z0-9-\\s(),.!&?]{1,30}$")
@@ -35,5 +37,5 @@ public class MovieDto extends Dto {
     @Pattern(regexp = "^[A-Za-z_]{5,15}$")
     private String genre;
 
-    private Set<ActorDto> actorDtos;
+    private Set<ActorRequestDto> actorDtos;
 }

@@ -35,4 +35,5 @@ public class Movie extends BaseEntity {
     )
     @ToString.Exclude
     private Set<Actor> actors;
+
 }
