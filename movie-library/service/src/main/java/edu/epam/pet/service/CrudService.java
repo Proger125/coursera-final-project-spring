@@ -1,35 +1,35 @@
 package edu.epam.pet.service;
 
+import edu.epam.pet.dto.Dto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
  * Interface which provides CRUD functionality to Service objects
- * @param <RequestDto>> - input dto model of current entity
- * @param <ResponseDto> - output dto model of current entity
+ * @param <Dto>> - input dto model of current entity
  */
-public interface CrudService<RequestDto extends edu.epam.pet.dto.RequestDto, ResponseDto extends edu.epam.pet.dto.ResponseDto> {
+public interface CrudService<Dto extends edu.epam.pet.dto.Dto> {
 
     /**
      * Saves entity to database
      * @param dto - dto instance of entity
      * @return dto instance of saved entity
      */
-    ResponseDto save(RequestDto dto);
+    Dto save(Dto dto);
 
     /**
      * Finds entity by id
      * @param id - entity's id
      * @return - dto instance of queried entity
      */
-    ResponseDto findById(Long id);
+    Dto findById(Long id);
 
     /**
      * Finds all entities according to the pagination parameters
      * @param pageable - pagination parameters
      * @return - dto instances of queried entities
      */
-    Page<ResponseDto> findAll(Pageable pageable);
+    Page<Dto> findAll(Pageable pageable);
 
     /**
      * Deletes entity by id

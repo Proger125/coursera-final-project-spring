@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public abstract class Dto {
 
-    @Min(value = 0)
+    @Min(1)
     private Long id;
 }

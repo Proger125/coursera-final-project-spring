@@ -1,6 +1,5 @@
-package edu.epam.pet.dto.actor;
+package edu.epam.pet.dto;
 
-import edu.epam.pet.dto.RequestDto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -10,20 +9,17 @@ import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ActorRequestDto extends RequestDto {
+public class ActorDto extends Dto{
 
-    @NotNull
-    @Pattern(regexp = "^[A-Z][a-z]{1,10}$")
+    @Pattern(regexp = "[A-Z][a-z]{1,10}")
     private String firstName;
 
-    @NotNull
-    @Pattern(regexp = "^[A-Z][a-z]{1,15}$")
+    @Pattern(regexp = "[A-Z][a-z]{1,12}")
     private String lastName;
 
     @NotNull
     private LocalDateTime birthDate;
 
     @NotNull
-    @Pattern(regexp = "^[A-Za-z]{4,6}$")
     private String gender;
 }

@@ -2,8 +2,7 @@ package edu.epam.pet.service.impl;
 
 import edu.epam.pet.converter.impl.ActorConverter;
 import edu.epam.pet.dao.ActorDao;
-import edu.epam.pet.dto.actor.ActorRequestDto;
-import edu.epam.pet.dto.actor.ActorResponseDto;
+import edu.epam.pet.dto.ActorDto;
 import edu.epam.pet.entity.Actor;
 import edu.epam.pet.exception.resource.ResourceNotFoundException;
 import edu.epam.pet.service.ActorService;
@@ -27,13 +26,13 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
-    public ActorResponseDto save(ActorRequestDto actorDto) {
+    public ActorDto save(ActorDto actorDto) {
         Actor actor = actorConverter.convertDtoToEntity(actorDto);
         return actorConverter.convertEntityToDto(actorDao.save(actor));
     }
 
     @Override
-    public ActorResponseDto findById(Long id) {
+    public ActorDto findById(Long id) {
         Optional<Actor> actorOptional = actorDao.findById(id);
         if (actorOptional.isEmpty()) {
             throw new ResourceNotFoundException("Actor not found by id: " + id, id);
@@ -42,7 +41,7 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
-    public Page<ActorResponseDto> findAll(Pageable pageable) {
+    public Page<ActorDto> findAll(Pageable pageable) {
         return new PageImpl<>(
                 actorDao.findAll(pageable)
                         .stream().map(actorConverter::convertEntityToDto)

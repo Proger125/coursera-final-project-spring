@@ -1,7 +1,6 @@
 package edu.epam.pet.web;
 
-import edu.epam.pet.dto.movie.MovieRequestDto;
-import edu.epam.pet.dto.movie.MovieResponseDto;
+import edu.epam.pet.dto.MovieDto;
 import edu.epam.pet.service.MovieService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/movies")
 @RestController
-public class MovieController implements CrudController<MovieRequestDto, MovieResponseDto>{
+public class MovieController implements CrudController<MovieDto>{
 
     private final MovieService movieService;
 
@@ -21,21 +20,21 @@ public class MovieController implements CrudController<MovieRequestDto, MovieRes
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MovieResponseDto save(@RequestBody MovieRequestDto dto) {
+    public MovieDto save(@RequestBody MovieDto dto) {
         return movieService.save(dto);
     }
 
     @Override
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public MovieResponseDto findById(@PathVariable Long id) {
+    public MovieDto findById(@PathVariable Long id) {
         return movieService.findById(id);
     }
 
     @Override
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<MovieResponseDto> findAll(
+    public Page<MovieDto> findAll(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "5", required = false) int size
     ) {

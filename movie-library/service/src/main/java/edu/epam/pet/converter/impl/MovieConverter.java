@@ -1,8 +1,7 @@
 package edu.epam.pet.converter.impl;
 
 import edu.epam.pet.converter.Converter;
-import edu.epam.pet.dto.movie.MovieRequestDto;
-import edu.epam.pet.dto.movie.MovieResponseDto;
+import edu.epam.pet.dto.MovieDto;
 import edu.epam.pet.entity.Genre;
 import edu.epam.pet.entity.Movie;
 import edu.epam.pet.exception.converter.IllegalEnumArgumentException;
@@ -12,17 +11,18 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Component
-public class MovieConverter implements Converter<Movie, MovieRequestDto, MovieResponseDto> {
+public class MovieConverter implements Converter<Movie, MovieDto> {
 
-    private final ActorConverter converter;
+    private final ActorConverter actorConverter;
 
-    public MovieConverter(ActorConverter converter) {
-        this.converter = converter;
+    public MovieConverter(ActorConverter actorConverter) {
+        this.actorConverter = actorConverter;
     }
 
     @Override
-    public Movie convertDtoToEntity(MovieRequestDto dto) {
+    public Movie convertDtoToEntity(MovieDto dto) {
         Movie movie = new Movie();
+        movie.setId(dto.getId());
         movie.setName(dto.getName());
         movie.setCreationYear(dto.getCreationYear());
         movie.setProfit(dto.getProfit());
@@ -30,28 +30,29 @@ public class MovieConverter implements Converter<Movie, MovieRequestDto, MovieRe
         try {
             movie.setGenre(Genre.valueOf(dto.getGenre().toUpperCase()));
         } catch (IllegalArgumentException e) {
-            throw new IllegalEnumArgumentException("Incorrect enum value: " + dto.getGenre(), dto.getGenre());
+            throw new IllegalEnumArgumentException();
         }
-        movie.setActors(dto.getActorDtos() == null
+
+        movie.setActors(dto.getActors() == null
                 ? new HashSet<>()
-                : dto.getActorDtos().stream().map(converter::convertDtoToEntity)
+                : dto.getActors()
+                .stream()
+                .map(actorConverter::convertDtoToEntity)
                 .collect(Collectors.toSet()));
         return movie;
     }
 
     @Override
-    public MovieResponseDto convertEntityToDto(Movie entity) {
-        MovieResponseDto dto = new MovieResponseDto();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setProfit(entity.getProfit());
-        dto.setDuration(entity.getDuration());
-        dto.setGenre(entity.getGenre().name());
-        dto.setCreationYear(entity.getCreationYear());
-        dto.setActorDtos(entity.getActors() == null
-                ? new HashSet<>()
-                : entity.getActors().stream().map(converter::convertEntityToDto)
+    public MovieDto convertEntityToDto(Movie entity) {
+        MovieDto movieDto = new MovieDto();
+        movieDto.setId(entity.getId());
+        movieDto.setName(entity.getName());
+        movieDto.setDuration(entity.getDuration());
+        movieDto.setProfit(entity.getProfit());
+        movieDto.setGenre(entity.getGenre().name());
+        movieDto.setActors(entity.getActors()
+                .stream().map(actorConverter::convertEntityToDto)
                 .collect(Collectors.toSet()));
-        return dto;
+        return movieDto;
     }
 }
