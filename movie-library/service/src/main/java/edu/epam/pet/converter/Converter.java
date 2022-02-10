@@ -7,9 +7,10 @@ import edu.epam.pet.entity.BaseEntity;
  * Converter interface used to convert dtos to entities and back.
  *
  * @param <Entity> - model of current entity
- * @param <Dto> - input dto model of current entity
+ * @param <RequestDto>> - input dto model of current entity
+ * @param <ResponseDto> - output dto model of current entity
  */
-public interface Converter<Entity extends BaseEntity, Dto extends edu.epam.pet.dto.Dto> {
+public interface Converter<Entity extends BaseEntity, RequestDto extends edu.epam.pet.dto.Dto, ResponseDto extends Dto> {
 
 
     /**
@@ -18,12 +19,12 @@ public interface Converter<Entity extends BaseEntity, Dto extends edu.epam.pet.d
      * @param dto - dto
      * @return entity
      */
-    Entity convertDtoToEntity(Dto dto);
+    Entity convertDtoToEntity(RequestDto dto);
 
     /**
      * Converts entity to dto
      * @param entity - entity
      * @return dto
      */
-    Dto convertEntityToDto(Entity entity);
+    ResponseDto convertEntityToDto(Entity entity);
 }

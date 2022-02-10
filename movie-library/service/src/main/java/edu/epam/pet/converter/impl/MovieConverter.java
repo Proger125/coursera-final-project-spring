@@ -1,26 +1,31 @@
 package edu.epam.pet.converter.impl;
 
 import edu.epam.pet.converter.Converter;
-import edu.epam.pet.dto.MovieDto;
+import edu.epam.pet.dto.movie.MovieRequestDto;
+import edu.epam.pet.dto.movie.MovieResponseDto;
 import edu.epam.pet.entity.Genre;
 import edu.epam.pet.entity.Movie;
 import edu.epam.pet.exception.converter.IllegalEnumArgumentException;
+import edu.epam.pet.util.ResponseGenerationUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Component
-public class MovieConverter implements Converter<Movie, MovieDto> {
+public class MovieConverter implements Converter<Movie, MovieRequestDto, MovieResponseDto> {
 
     private final ActorConverter actorConverter;
 
-    public MovieConverter(ActorConverter actorConverter) {
+    private final ResponseGenerationUtil responseGenerationUtil;
+
+    public MovieConverter(ActorConverter actorConverter, ResponseGenerationUtil responseGenerationUtil) {
         this.actorConverter = actorConverter;
+        this.responseGenerationUtil = responseGenerationUtil;
     }
 
     @Override
-    public Movie convertDtoToEntity(MovieDto dto) {
+    public Movie convertDtoToEntity(MovieRequestDto dto) {
         Movie movie = new Movie();
         movie.setId(dto.getId());
         movie.setName(dto.getName());
@@ -43,16 +48,17 @@ public class MovieConverter implements Converter<Movie, MovieDto> {
     }
 
     @Override
-    public MovieDto convertEntityToDto(Movie entity) {
-        MovieDto movieDto = new MovieDto();
-        movieDto.setId(entity.getId());
-        movieDto.setName(entity.getName());
-        movieDto.setDuration(entity.getDuration());
-        movieDto.setProfit(entity.getProfit());
-        movieDto.setGenre(entity.getGenre().name());
-        movieDto.setActors(entity.getActors()
-                .stream().map(actorConverter::convertEntityToDto)
+    public MovieResponseDto convertEntityToDto(Movie entity) {
+        MovieResponseDto movieResponseDto = new MovieResponseDto();
+        movieResponseDto.setId(entity.getId());
+        movieResponseDto.setName(entity.getName());
+        movieResponseDto.setDuration(entity.getDuration());
+        movieResponseDto.setProfit(entity.getProfit());
+        movieResponseDto.setGenre(entity.getGenre().name());
+        movieResponseDto.setActors(entity.getActors()
+                .stream()
+                .map(responseGenerationUtil::createActorStringResponse)
                 .collect(Collectors.toSet()));
-        return movieDto;
+        return movieResponseDto;
     }
 }

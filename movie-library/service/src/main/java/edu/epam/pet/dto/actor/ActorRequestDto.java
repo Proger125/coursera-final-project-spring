@@ -1,5 +1,6 @@
-package edu.epam.pet.dto;
+package edu.epam.pet.dto.actor;
 
+import edu.epam.pet.dto.Dto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ActorDto extends Dto{
+public class ActorRequestDto extends Dto {
 
     @Pattern(regexp = "[A-Z][a-z]{1,10}")
     private String firstName;

@@ -1,27 +1,28 @@
 package edu.epam.pet.web;
 
+import edu.epam.pet.dto.Dto;
 import org.springframework.data.domain.Page;
 
 /**
  * Interface which provides CRUD functionality to Controller objects
- * @param <Dto>> - input dto model of current entity
+ * @param <RequestDto>> - input dto model of current entity
  */
 
-public interface CrudController<Dto extends edu.epam.pet.dto.Dto> {
+public interface CrudController<RequestDto extends edu.epam.pet.dto.Dto, ResponseDto extends Dto> {
 
     /**
      * Saves entity to database
-     * @param dto - dto instance of entity
+     * @param requestDto - dto instance of entity
      * @return dto instance of saved entity
      */
-    Dto save(Dto dto);
+    ResponseDto save(RequestDto requestDto);
 
     /**
      * Finds entity by id
      * @param id - entity's id
      * @return - dto instance of queried entity
      */
-    Dto findById(Long id);
+    ResponseDto findById(Long id);
 
     /**
      * Finds all entities according to the pagination parameters
@@ -29,7 +30,7 @@ public interface CrudController<Dto extends edu.epam.pet.dto.Dto> {
      * @param size - page size
      * @return - dto instances of queried entities according to parameters
      */
-    Page<Dto> findAll(int page, int size);
+    Page<ResponseDto> findAll(int page, int size);
 
     /**
      * Deletes entity by id

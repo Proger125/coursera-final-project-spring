@@ -104,4 +104,11 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="2.0.11" author="alex.dzyachenka">
+        <addColumn tableName="cinema_halls">
+            <column name="number" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

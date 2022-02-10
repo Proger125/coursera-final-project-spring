@@ -1,5 +1,6 @@
 package edu.epam.pet.dto;
 
+import edu.epam.pet.dto.cinemasession.CinemaSessionRequestDto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -19,5 +20,5 @@ public class PlaceDto extends Dto{
     private boolean isTaken;
 
     @NotNull
-    private CinemaSessionDto cinemaSession;
+    private CinemaSessionRequestDto cinemaSession;
 }

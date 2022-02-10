@@ -17,6 +17,8 @@ import java.util.Set;
 @Table(name = "cinema_halls")
 public class CinemaHall extends BaseEntity {
 
+    private int number;
+
     private BigDecimal onePlaceCost;
 
     @ManyToOne(fetch = FetchType.LAZY)

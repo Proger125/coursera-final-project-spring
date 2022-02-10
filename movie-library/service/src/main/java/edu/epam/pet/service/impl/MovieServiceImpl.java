@@ -3,7 +3,8 @@ package edu.epam.pet.service.impl;
 import edu.epam.pet.converter.impl.MovieConverter;
 import edu.epam.pet.dao.ActorDao;
 import edu.epam.pet.dao.MovieDao;
-import edu.epam.pet.dto.MovieDto;
+import edu.epam.pet.dto.movie.MovieRequestDto;
+import edu.epam.pet.dto.movie.MovieResponseDto;
 import edu.epam.pet.entity.Actor;
 import edu.epam.pet.entity.Movie;
 import edu.epam.pet.exception.resource.ResourceNotFoundException;
@@ -34,7 +35,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     @Transactional
-    public MovieDto save(MovieDto dto) {
+    public MovieResponseDto save(MovieRequestDto dto) {
         Movie movie = movieConverter.convertDtoToEntity(dto);
         for (var actor : movie.getActors()) {
             Optional<Actor> optionalActor = actorDao.findActorByFirstNameAndLastNameAndBirthDate(
@@ -51,7 +52,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public MovieDto findById(Long id) {
+    public MovieResponseDto findById(Long id) {
         Optional<Movie> optionalMovie = movieDao.findById(id);
         if (optionalMovie.isEmpty()) {
             throw new ResourceNotFoundException("Movie not found by id: " + id, id);
@@ -60,7 +61,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Page<MovieDto> findAll(Pageable pageable) {
+    public Page<MovieResponseDto> findAll(Pageable pageable) {
         return new PageImpl<>(
                 movieDao.findAll(pageable)
                         .stream().map(movieConverter::convertEntityToDto)
