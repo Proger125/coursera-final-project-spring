@@ -27,7 +27,8 @@ public class Cinema extends BaseEntity {
     @ToString.Exclude
     private Set<Movie> movies;
 
-    @OneToMany(mappedBy = "cinema", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cinema_id")
     @ToString.Exclude
     private Set<CinemaHall> halls;
 

@@ -7,6 +7,7 @@ import edu.epam.pet.entity.Cinema;
 import edu.epam.pet.util.ResponseGenerationUtil;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,10 +28,13 @@ public class CinemaConverter implements Converter<Cinema, CinemaRequestDto, Cine
         Cinema cinema = new Cinema();
         cinema.setId(dto.getId());
         cinema.setName(dto.getName());
-        cinema.setMovies(dto.getMovies()
-                .stream()
+        cinema.setMovies(
+                dto.getMovies() == null
+                ? new HashSet<>()
+                : dto.getMovies().stream()
                 .map(movieConverter::convertDtoToEntity)
                 .collect(Collectors.toSet()));
+        cinema.setHalls(new HashSet<>());
         return cinema;
     }
 

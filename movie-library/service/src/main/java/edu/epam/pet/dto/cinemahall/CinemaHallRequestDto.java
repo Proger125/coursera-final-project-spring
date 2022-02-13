@@ -15,9 +15,6 @@ import java.util.Set;
 public class CinemaHallRequestDto extends Dto {
 
     @Min(1)
-    private int number;
-
-    @Min(1)
     private BigDecimal onePlaceCost;
 
     private CinemaRequestDto cinema;

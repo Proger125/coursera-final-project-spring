@@ -111,4 +111,24 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="2.0.12" author="alex.dzyachenka">
+        <dropColumn tableName="cinema_halls">
+            <column name="number"/>
+        </dropColumn>
+        <addColumn tableName="cinema_halls">
+            <column name="number" type="int">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2.0.13" author="alex.dzyachenka">
+        <dropColumn tableName="cinema_halls">
+            <column name="number"/>
+        </dropColumn>
+        <addColumn tableName="cinema_halls">
+            <column name="number" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.7.xsd">
+
+    <changeSet id="3.0.1" author="alex.dzyachenka">
+        <createTable tableName="cinema_cinema_hall">
+            <column name="cinema_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cinema_hall_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="cinema_cinema_hall" baseColumnNames="cinema_id"
+                                 constraintName="fk_cinema_cinema_hall_cinema"
+                                 referencedTableName="cinemas"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+        <addForeignKeyConstraint baseTableName="cinema_cinema_hall" baseColumnNames="cinema_hall_id"
+                                 constraintName="fk_cinema_cinema_hall_cinema_hall"
+                                 referencedTableName="cinema_halls"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="3.0.2" author="alex.dzyachenka">
+        <dropTable tableName="cinema_cinema_hall"/>
+    </changeSet>
+    <changeSet id="3.0.3" author="alex.dzyachenka">
+        <addColumn tableName="cinema_halls">
+            <column name="cinema_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="cinema_halls" baseColumnNames="cinema_id"
+                                 constraintName="fk_cinema_halls_cinema"
+                                 referencedTableName="cinemas"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+</databaseChangeLog>

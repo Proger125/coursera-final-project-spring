@@ -7,6 +7,7 @@ import edu.epam.pet.entity.CinemaHall;
 import edu.epam.pet.util.ResponseGenerationUtil;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,7 +27,6 @@ public class CinemaHallConverter implements Converter<CinemaHall, CinemaHallRequ
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setId(dto.getId());
         cinemaHall.setOnePlaceCost(dto.getOnePlaceCost());
-        cinemaHall.setNumber(dto.getNumber());
         cinemaHall.setCinema(cinemaConverter.convertDtoToEntity(dto.getCinema()));
         return cinemaHall;
     }
@@ -39,7 +39,9 @@ public class CinemaHallConverter implements Converter<CinemaHall, CinemaHallRequ
         cinemaHallResponseDto.setOnePlaceCost(entity.getOnePlaceCost());
         cinemaHallResponseDto.setCinema(responseGenerationUtil.createCinemaStringResponse(entity.getCinema()));
         cinemaHallResponseDto.setSessions(
-                entity.getCinemaSessions()
+                entity.getCinemaSessions() == null
+                        ? new HashSet<>()
+                        : entity.getCinemaSessions()
                         .stream()
                         .map(responseGenerationUtil::createCinemaSessionStringResponse)
                         .collect(Collectors.toSet()));

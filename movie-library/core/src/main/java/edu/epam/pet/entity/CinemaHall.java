@@ -22,7 +22,7 @@ public class CinemaHall extends BaseEntity {
     private BigDecimal onePlaceCost;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    //@JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     @ToString.Exclude
     private Cinema cinema;
 
