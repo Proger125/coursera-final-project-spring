@@ -18,15 +18,14 @@ public class CinemaSession extends BaseEntity {
 
     private LocalDateTime sessionDate;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,orphanRemoval = true)
     private Movie movie;
 
-    @ManyToOne
-    @JoinColumn(name="id", nullable = false, insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     private CinemaHall cinemaHall;
 
-    @OneToMany(mappedBy = "cinemaSession", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cinema_session_id")
     @ToString.Exclude
     private Set<Place> places;
 }

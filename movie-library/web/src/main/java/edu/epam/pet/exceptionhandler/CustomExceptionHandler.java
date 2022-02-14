@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @ControllerAdvice
 public class CustomExceptionHandler {
 
@@ -28,6 +30,14 @@ public class CustomExceptionHandler {
         ExceptionMessage exceptionMessage = new ExceptionMessage();
         exceptionMessage.setErrorCode(400);
         exceptionMessage.setMessage("Illegal enum argument: " + e.getIncorrectValue() + ". It should be male or female");
+        return new ResponseEntity<>(exceptionMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<ExceptionMessage> handleSQLIntegrityConstraintViolationException() {
+        ExceptionMessage exceptionMessage = new ExceptionMessage();
+        exceptionMessage.setErrorCode(400);
+        exceptionMessage.setMessage("You can't delete this entity. It has connections");
         return new ResponseEntity<>(exceptionMessage, HttpStatus.BAD_REQUEST);
     }
 }

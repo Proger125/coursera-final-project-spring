@@ -43,4 +43,40 @@
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"/>
     </changeSet>
+    <changeSet id="3.0.4" author="alex.dzyachenka">
+        <addColumn tableName="places">
+            <column name="cinema_session_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="3.0.5" author="alex.dzyachenka">
+        <addForeignKeyConstraint baseTableName="places" baseColumnNames="cinema_session_id"
+                                 constraintName="fk_places_cinema_session"
+                                 referencedTableName="cinema_sessions"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="3.0.6" author="alex.dzyachenka">
+        <addColumn tableName="cinema_sessions">
+            <column name="cinema_hall_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="cinema_sessions" baseColumnNames="cinema_hall_id"
+                                 constraintName="fk_cinema_sessions_cinema_hall"
+                                 referencedTableName="cinema_halls"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="3.0.7" author="alex.dzyachenka">
+        <addForeignKeyConstraint baseTableName="cinema_sessions" baseColumnNames="movie_id"
+                                 constraintName="fk_cinema_sessions_movie"
+                                 referencedTableName="movies"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
 </databaseChangeLog>

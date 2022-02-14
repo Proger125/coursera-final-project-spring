@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,6 +52,7 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         Optional<Actor> optionalActor = actorDao.findById(id);
         if (optionalActor.isEmpty()) {

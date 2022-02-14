@@ -70,6 +70,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         Optional<Movie> optionalMovie = movieDao.findById(id);
         if (optionalMovie.isEmpty()) {

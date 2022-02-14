@@ -22,6 +22,5 @@ public class Place extends BaseEntity {
     private boolean isTaken;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private CinemaSession cinemaSession;
 }

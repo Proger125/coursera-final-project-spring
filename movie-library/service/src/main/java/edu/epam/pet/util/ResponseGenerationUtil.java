@@ -39,4 +39,11 @@ public class ResponseGenerationUtil {
                 "Movie: " + createMovieStringResponse(cinemaSession.getMovie()) + ", " +
                 "Cinema hall: " + createCinemaHallStringResponse(cinemaSession.getCinemaHall()) + ".";
     }
+
+    public String createPlaceStringResponse(Place place) {
+        return "Id: " + place.getId() + ", " +
+                "Place: " + place.getSeatPlace() + ", " +
+                "Row: " + place.getSeatRow() + ", " +
+                "Cinema session: " + createCinemaSessionStringResponse(place.getCinemaSession()) + ".";
+    }
 }

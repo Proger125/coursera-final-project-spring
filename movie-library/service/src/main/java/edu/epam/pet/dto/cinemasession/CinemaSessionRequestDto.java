@@ -17,8 +17,8 @@ public class CinemaSessionRequestDto extends Dto {
     private LocalDateTime sessionDate;
 
     @NotNull
-    private MovieRequestDto movieRequestDto;
+    private Long movieId;
 
     @NotNull
-    private CinemaHallRequestDto cinemaHallRequestDto;
+    private Long cinemaHallId;
 }

@@ -66,6 +66,7 @@ public class CinemaHallServiceImpl implements CinemaHallService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         Optional<CinemaHall> optionalCinemaHall = cinemaHallDao.findById(id);
         if (optionalCinemaHall.isEmpty()) {

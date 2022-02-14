@@ -17,7 +17,8 @@ public class CinemaHallRequestDto extends Dto {
     @Min(1)
     private BigDecimal onePlaceCost;
 
-    private CinemaRequestDto cinema;
+    @Min(1)
+    private Long cinemaId;
 
     private Set<CinemaSessionRequestDto> sessions;
 }

@@ -3,6 +3,7 @@ package edu.epam.pet.converter.impl;
 import edu.epam.pet.converter.Converter;
 import edu.epam.pet.dto.cinemahall.CinemaHallRequestDto;
 import edu.epam.pet.dto.cinemahall.CinemaHallResponseDto;
+import edu.epam.pet.entity.Cinema;
 import edu.epam.pet.entity.CinemaHall;
 import edu.epam.pet.util.ResponseGenerationUtil;
 import org.springframework.stereotype.Component;
@@ -13,12 +14,10 @@ import java.util.stream.Collectors;
 @Component
 public class CinemaHallConverter implements Converter<CinemaHall, CinemaHallRequestDto, CinemaHallResponseDto> {
 
-    private final CinemaConverter cinemaConverter;
 
     private final ResponseGenerationUtil responseGenerationUtil;
 
-    public CinemaHallConverter(CinemaConverter cinemaConverter, ResponseGenerationUtil responseGenerationUtil) {
-        this.cinemaConverter = cinemaConverter;
+    public CinemaHallConverter(ResponseGenerationUtil responseGenerationUtil) {
         this.responseGenerationUtil = responseGenerationUtil;
     }
 
@@ -27,7 +26,9 @@ public class CinemaHallConverter implements Converter<CinemaHall, CinemaHallRequ
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setId(dto.getId());
         cinemaHall.setOnePlaceCost(dto.getOnePlaceCost());
-        cinemaHall.setCinema(cinemaConverter.convertDtoToEntity(dto.getCinema()));
+        Cinema cinema = new Cinema();
+        cinema.setId(dto.getCinemaId());
+        cinemaHall.setCinema(cinema);
         return cinemaHall;
     }
 
