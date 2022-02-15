@@ -2,6 +2,7 @@ package edu.epam.pet.exceptionhandler;
 
 import edu.epam.pet.exception.converter.IllegalEnumArgumentException;
 import edu.epam.pet.exception.resource.ResourceNotFoundException;
+import edu.epam.pet.exception.resource.TakenPlaceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -38,6 +39,14 @@ public class CustomExceptionHandler {
         ExceptionMessage exceptionMessage = new ExceptionMessage();
         exceptionMessage.setErrorCode(400);
         exceptionMessage.setMessage("You can't delete this entity. It has connections");
+        return new ResponseEntity<>(exceptionMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TakenPlaceException.class)
+    public ResponseEntity<ExceptionMessage> handleTakenPlaceException() {
+        ExceptionMessage exceptionMessage = new ExceptionMessage();
+        exceptionMessage.setErrorCode(400);
+        exceptionMessage.setMessage("This place is already taken. Choose another one, please.");
         return new ResponseEntity<>(exceptionMessage, HttpStatus.BAD_REQUEST);
     }
 }

@@ -79,4 +79,11 @@
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"/>
     </changeSet>
+    <changeSet id="3.0.8" author="alex.dzyachenka">
+        <addForeignKeyConstraint baseTableName="tickets" baseColumnNames="place_id" constraintName="fk_tickets_place"
+                                 referencedTableName="places"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
 </databaseChangeLog>

@@ -18,7 +18,6 @@ public class Ticket extends BaseEntity {
 
     private BigDecimal cost;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Place place;
 }

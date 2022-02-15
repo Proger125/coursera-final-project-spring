@@ -18,7 +18,7 @@ public class CinemaSession extends BaseEntity {
 
     private LocalDateTime sessionDate;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, orphanRemoval = true)
     private Movie movie;
 
     @ManyToOne(fetch = FetchType.EAGER)
